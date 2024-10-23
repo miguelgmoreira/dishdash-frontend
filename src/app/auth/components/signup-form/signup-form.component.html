@@ -1,0 +1,119 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <!-- Nome do Restaurante -->
+    <div>
+      <label
+        for="restaurantName"
+        class="block mb-2 text-sm text-gray-600"
+        >Nome do Restaurante</label
+      >
+      <input
+        formControlName="restaurantName"
+        type="text"
+        placeholder="Nome do meu restaurante"
+        name="restaurantName"
+        id="restaurantName"
+        required
+        class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md"
+      />
+      <app-form-errors [control]="f.restaurantName"></app-form-errors>
+    </div>
+  
+    <!-- Telefone de Contato -->
+    <div class="mt-6">
+      <label
+        for="phone"
+        class="block mb-2 text-sm text-gray-600 "
+        >Telefone de Contato</label
+      >
+      <input
+        formControlName="phone"
+        type="tel"
+        placeholder="(XX)XXXXX-XXXX"
+        name="phone"
+        id="phone"
+        required
+        class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md"
+      />
+      <app-form-errors [control]="f.phone"></app-form-errors>
+    </div>
+
+  <!-- Email -->
+  <div class="mt-6">
+    <label
+      for="email"
+      class="block mb-2 text-sm text-gray-60"
+      >Email</label
+    >
+    <input
+      formControlName="email"
+      type="email"
+      name="email"
+      id="email"
+      placeholder="example@example.com"
+      autocomplete="username"
+      required
+      class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md"
+    />
+    <app-form-errors [control]="f.email"></app-form-errors>
+  </div>
+
+  <!-- Senha -->
+  <div class="mt-6">
+    <div class="flex justify-between mb-2">
+      <label for="password" class="text-sm text-gray-600"
+        >Senha</label
+      >
+    </div>
+
+    <input
+      formControlName="password"
+      type="password"
+      name="password"
+      id="password"
+      placeholder="Sua senha"
+      autocomplete="new-password"
+      required
+      class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md"
+    />
+    <app-form-errors [control]="f.password"></app-form-errors>
+  </div>
+
+  <!-- Confirmação de Senha -->
+  <div class="mt-6">
+    <div class="flex justify-between mb-2">
+      <label
+        for="confirmPassword"
+        class="text-sm text-gray-600"
+        >Confirme sua senha</label
+      >
+    </div>
+
+    <input
+      formControlName="confirmPassword"
+      type="password"
+      name="confirmPassword"
+      id="confirmPassword"
+      placeholder="Confirme sua senha"
+      autocomplete="new-password"
+      required
+      class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md"
+    />
+    <app-form-errors [control]="f.confirmPassword"></app-form-errors>
+
+    <!-- Erro específico para quando as senhas não coincidem -->
+    <div *ngIf="signupForm.hasError('passwordsDoNotMatch') && f.confirmPassword.touched">
+      <p class="mt-2 text-sm text-red-600">As senhas não coincidem.</p>
+    </div>
+  </div>
+
+  <!-- Botão de Submissão -->
+  <div class="mt-6">
+    <button
+      type="submit"
+      class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-brand rounded-md hover:bg-[#FF5C00] cursor-pointer"
+      [disabled]="signupForm.invalid"
+    >
+      Entrar
+    </button>
+  </div>
+</form>
