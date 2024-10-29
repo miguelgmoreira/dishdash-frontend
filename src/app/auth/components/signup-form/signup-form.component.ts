@@ -2,27 +2,32 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormGroup,
   ReactiveFormsModule,
-  Validators,
+  Validators
 } from '@angular/forms';
+import { FormBaseComponent } from '../../../shared/components/form-base/form-base.component';
 import { FormErrorsComponent } from '../../../shared/components/form-errors/form-errors.component';
+import { InputComponent } from '../../../shared/components/input/input.component';
 import { EmailValidators } from '../../../shared/validators/email-validators';
 import { PasswordValidators } from '../../../shared/validators/password-validators';
 
 @Component({
   selector: 'app-signup-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormErrorsComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormErrorsComponent, InputComponent],
   templateUrl: './signup-form.component.html',
 })
-export class SignUpFormComponent implements OnInit {
-  signupForm!: FormGroup;
-
-  constructor(private fb: FormBuilder) {}
+export class SignUpFormComponent extends FormBaseComponent implements OnInit {
+  constructor(private fb: FormBuilder) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.signupForm = this.fb.group(
+    this.buildForm();
+  }
+
+  override buildForm(): void {
+    this.form = this.fb.group(
       {
         restaurantName: [null, Validators.required],
         phone: [null, Validators.required],
@@ -63,14 +68,8 @@ export class SignUpFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.signupForm.valid) {
-      console.log('Sign up form: ', this.signupForm.value);
+    if (this.form.valid) {
+      console.log('Sign up form: ', this.form.value);
     }
-
-
-  }
-
-  get f() {
-    return this.signupForm.controls;
   }
 }

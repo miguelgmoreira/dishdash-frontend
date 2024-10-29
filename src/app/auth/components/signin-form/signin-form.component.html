@@ -1,26 +1,21 @@
-<form>
-  <div>
-    <label
-      for="email"
-      class="block mb-2 text-sm text-gray-600"
-      >Email</label
-    >
-    <input
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="mt-6">
+    <app-input
+      label="Email"
       type="email"
       name="email"
       id="email"
+      [control]="f.email"
       placeholder="exemplo@exemplo.com"
       autocomplete="username"
-      required
-      class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md"
-    />
+      [required]="true"
+      icon="fa-solid fa-envelope"
+    >
+    </app-input>
   </div>
-
   <div class="mt-6">
     <div class="flex justify-between mb-2">
-      <label for="password" class="text-sm text-gray-600"
-        >Senha</label
-      >
+      <label for="password" class="text-sm text-gray-600">Senha</label>
       <a
         href="#"
         class="text-sm text-gray-400 focus:text-brand hover:text-brand hover:underline"
@@ -32,10 +27,11 @@
       type="password"
       name="password"
       id="password"
+      formControlName="password"
       placeholder="Sua senha"
       autocomplete="current-password"
       required
-      class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md"
+      class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md outline-gray-200"
     />
   </div>
 

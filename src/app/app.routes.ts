@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from './core/guards/auth.guard';
+import { AuthGuard } from './auth/guards/auth.guard';
 import { LoginLayoutComponent } from './pages/login-layout/login-layout.component';
 import { MainLayoutComponent } from './pages/main-layout/main-layout.component';
 
@@ -17,8 +17,8 @@ export const routes: Routes = [
       {
         path: 'gerenciar-cardapio',
         loadComponent: () =>
-          import('./features/gerenciar-cardapio/gerenciar-cardapio.component').then(
-            (m) => m.CardapioComponent
+          import('./features/manage-menu/manage-menu.component').then(
+            (m) => m.ManageMenuComponent
           ),
       },
     ],

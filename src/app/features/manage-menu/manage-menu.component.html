@@ -1,0 +1,37 @@
+<div class="p-4 border-gray-200 rounded-lg">
+  <div class="flex items-center justify-end">
+    <app-button btnText="Novo Item" icon="fa-solid fa-plus"></app-button>
+  </div>
+  <form [formGroup]="form" class="mb-4">
+    <app-input
+      placeholder="Busque por um item no carápio"
+      type="text"
+      name="searchItem"
+      [control]="f.searchItem"
+      icon="fa solid fa-magnifying-glass"
+    ></app-input>
+  </form>
+  <div class="flex gap-4 mb-4">
+    <app-menu-category
+      categoryLabel="Todos"
+      [itemsCount]="56"
+    ></app-menu-category>
+    <app-menu-category
+      categoryLabel="Entradas"
+      [itemsCount]="10"
+    ></app-menu-category>
+    <app-menu-category
+      categoryLabel="Pratos principais"
+      [itemsCount]="12"
+    ></app-menu-category>
+    <app-menu-category
+      categoryLabel="Sobremesas"
+      [itemsCount]="6"
+    ></app-menu-category>
+    <app-menu-category
+      categoryLabel="Drinks"
+      [itemsCount]="18"
+    ></app-menu-category>
+  </div>
+  <app-menu-item> </app-menu-item>
+</div>
