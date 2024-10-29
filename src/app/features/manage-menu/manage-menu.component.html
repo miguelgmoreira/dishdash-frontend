@@ -1,6 +1,6 @@
 <div class="p-4 border-gray-200 rounded-lg">
   <div class="flex items-center justify-end">
-    <app-button btnText="Novo Item" icon="fa-solid fa-plus"></app-button>
+    <app-button btnText="Novo Item" icon="fa-solid fa-plus" class="mb-2 me-2"></app-button>
   </div>
   <form [formGroup]="form" class="mb-4">
     <app-input
@@ -11,7 +11,7 @@
       icon="fa solid fa-magnifying-glass"
     ></app-input>
   </form>
-  <div class="flex gap-4 mb-4">
+  <div class="flex gap-4 mb-6">
     <app-menu-category
       categoryLabel="Todos"
       [itemsCount]="56"

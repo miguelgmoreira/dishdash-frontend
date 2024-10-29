@@ -1,7 +1,9 @@
 <button
   *ngIf="icon; else noIcon"
   type="button"
-  class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+  class="text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300"
+  [ngClass]="sizeClass"
+  [disabled]="disabled"
 >
   <i class="w-3.5 h-3.5 me-2" [ngClass]="icon"></i>
   {{btnText}}
@@ -10,7 +12,8 @@
 <ng-template #noIcon>
   <button
     type="button"
-    class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+    class="text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300"
+    [ngClass]="sizeClass"
     [disabled]="disabled"
   >
     {{ btnText }}
