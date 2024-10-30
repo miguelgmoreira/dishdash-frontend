@@ -8,6 +8,7 @@ import { FormBaseComponent } from '../../shared/components/form-base/form-base.c
 import { InputComponent } from '../../shared/components/input/input.component';
 import { MenuCategoryComponent } from '../../shared/components/menu-category/menu-category.component';
 import { MenuItemComponent } from '../../shared/components/menu-item/menu-item.component';
+import { MenuItem } from '../../shared/models/menu-item.model';
 
 @Component({
   selector: 'app-gerenciar-cardapio',
@@ -19,14 +20,32 @@ import { MenuItemComponent } from '../../shared/components/menu-item/menu-item.c
 export class ManageMenuComponent extends FormBaseComponent implements OnInit {
   private unsubscribe$ = new Subject<void>();
 
+  menuItems: MenuItem[] = [{
+    id: 1, name: "Escondidinho de carne de sol", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae minusatque nemo magni explicabo adipisci?", imageSrc: "images/logo-dishdash-rounded.png"
+  }, {
+    id: 1, name: "Escondidinho de carne de sol", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae minusatque nemo magni explicabo adipisci?", imageSrc: "images/logo-dishdash-rounded.png"
+  }, {
+    id: 1, name: "Escondidinho de carne de sol", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae minusatque nemo magni explicabo adipisci?", imageSrc: "images/logo-dishdash-rounded.png"
+  }, {
+    id: 1, name: "Escondidinho de carne de sol", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae minusatque nemo magni explicabo adipisci?", imageSrc: "images/logo-dishdash-rounded.png"
+  }, {
+    id: 1, name: "Escondidinho de carne de sol", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae minusatque nemo magni explicabo adipisci?", imageSrc: "images/logo-dishdash-rounded.png"
+  }, {
+    id: 1, name: "Escondidinho de carne de sol", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae minusatque nemo magni explicabo adipisci?", imageSrc: "images/logo-dishdash-rounded.png"
+  }, {
+    id: 1, name: "Escondidinho de carne de sol", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae minusatque nemo magni explicabo adipisci?", imageSrc: "images/logo-dishdash-rounded.png"
+  }, {
+    id: 1, name: "Escondidinho de carne de sol", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae minusatque nemo magni explicabo adipisci?", imageSrc: "images/logo-dishdash-rounded.png"
+  }];
+
   constructor(private fb: FormBuilder, private searchService: SearchService) {
     super();
   }
 
   ngOnInit(): void {
-      this.buildForm();
+    this.buildForm();
 
-      this.searchService.searchTerm$
+    this.searchService.searchTerm$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(searchTerm => {
         this.onSearch(searchTerm);

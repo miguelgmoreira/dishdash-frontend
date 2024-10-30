@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
+import { MenuItem } from '../../models/menu-item.model';
 
 @Component({
   selector: 'app-menu-item',
@@ -9,4 +10,6 @@ import { ButtonComponent } from '../button/button.component';
   templateUrl: './menu-item.component.html',
   styleUrl: './menu-item.component.css',
 })
-export class MenuItemComponent {}
+export class MenuItemComponent {
+  @Input() item!: MenuItem;
+}
