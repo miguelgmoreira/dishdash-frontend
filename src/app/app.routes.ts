@@ -6,7 +6,7 @@ import { MainLayoutComponent } from './pages/main-layout/main-layout.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'admin/gerenciar-cardapio',
+    redirectTo: 'admin/cardapio',
     pathMatch: 'full',
   },
   {
@@ -15,12 +15,43 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'gerenciar-cardapio',
-        loadComponent: () =>
-          import('./features/manage-menu/manage-menu.component').then(
-            (m) => m.ManageMenuComponent
-          ),
-      },
+        path: 'cardapio',
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./features/menu/manage-menu/manage-menu.component').then(
+                (m) => m.ManageMenuComponent
+              ),
+          },
+          {
+            path: 'novo',
+            loadComponent: () =>
+              import('./features/menu/create-menu-item/create-menu-item.component').then(
+                (m) => m.CreateMenuItemComponent
+              ),
+          },
+          {
+            path: 'editar/:id',
+            loadComponent: () =>
+              import('./features/menu/edit-menu-item/edit-menu-item.component').then(
+                (m) => m.EditMenuItemComponent
+              ),
+          },
+          {
+            path: 'categoria',
+            children: [
+              {
+                path: 'novo',
+                loadComponent: () => 
+                  import('./features/menu/create-menu-category/create-menu-category.component').then(
+                    (m) => m.CreateMenuCategoryComponent
+                  )
+              }
+            ]
+          },
+        ]
+      }
     ],
   },
   {
@@ -38,6 +69,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/cardapio',
+    redirectTo: 'admin/cardapio',
   },
 ];

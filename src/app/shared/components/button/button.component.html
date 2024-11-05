@@ -1,20 +1,22 @@
 <button
   *ngIf="icon; else noIcon"
   type="button"
-  class="text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300"
-  [ngClass]="sizeClass"
+  class="font-medium rounded-lg focus:ring-4"
+  [ngClass]="[sizeClass, colorClass]"
   [disabled]="disabled"
+  (click)="click.emit()"
 >
   <i class="w-3.5 h-3.5 me-2" [ngClass]="icon"></i>
-  {{btnText}}
+  {{ btnText }}
 </button>
 
 <ng-template #noIcon>
   <button
     type="button"
-    class="text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300"
-    [ngClass]="sizeClass"
+    class="font-medium rounded-lg focus:ring-4"
+    [ngClass]="[sizeClass, colorClass]"
     [disabled]="disabled"
+    (click)="click.emit()"
   >
     {{ btnText }}
   </button>

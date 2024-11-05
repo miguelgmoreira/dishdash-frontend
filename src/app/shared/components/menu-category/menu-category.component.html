@@ -1,7 +1,14 @@
-<button class="flex items-center gap-3 px-4 py-3 bg-gray-100 rounded-lg hover:bg-gray-200">
-    <img src="images/logo-dishdash-rounded.png" alt="" class="w-12 h-12 rounded-full">
-    <div class="flex flex-col text-start">
-        <div class="text-base font-bold bolder">{{categoryLabel}}</div>
-        <div class="text-sm">{{itemsCount}} items</div>
-    </div>
+<button
+  class="flex items-center gap-2 p-3 rounded-lg min-w-max hover:bg-gray-200 whitespace-nowrap"
+  [ngClass]="{ 'bg-gray-200': isSelected, 'bg-gray-100': !isSelected }"
+>
+  <img
+    [src]="category.imageUrl"
+    alt=""
+    class="object-cover w-12 h-12 rounded-md"
+  />
+  <div class="flex flex-col text-start">
+    <div class="text-base font-semibold">{{ category.label }}</div>
+    <div class="text-sm">{{ category.itemCount }} items</div>
+  </div>
 </button>

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { MenuCategory } from '../../models/menu-category.model';
 
 @Component({
   selector: 'app-menu-category',
@@ -9,8 +10,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrl: './menu-category.component.css'
 })
 export class MenuCategoryComponent implements OnInit {
-  @Input() categoryLabel!: string;
-  @Input() itemsCount: number = 0;
+  @Input() category!: MenuCategory;
+  @Input() isSelected: boolean = false;
 
   constructor() {}
 
