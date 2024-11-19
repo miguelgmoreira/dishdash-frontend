@@ -1,17 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { MenuCategory } from '../../shared/models/menu-category.model';
-import { menuCategoryMock } from '../mocks/menu-category.mock';
+import { Observable } from 'rxjs';
+import { MenuCategoryResponse } from '../../shared/models/menu-category.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MenuCategoryService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getAll(): Observable<MenuCategory[]> {
-    const categories: MenuCategory[] = menuCategoryMock;
-
-    return of(categories);
+  getAll(): Observable<MenuCategoryResponse[]> {
+    return this.http.get<MenuCategoryResponse[]>("/api/menu-categories");
   }
 }

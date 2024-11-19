@@ -1,13 +1,5 @@
 <div class="p-4 border-gray-200 rounded-lg">
-  <div class="flex items-center justify-end">
-    <app-button
-      btnText="Novo Item"
-      icon="fa-solid fa-plus"
-      class="mb-2 me-2"
-      variant="outline"
-      (click)="navigateToCreateMenuItem()"
-    ></app-button>
-  </div>
+  <h2 class="mb-6 text-2xl">Seu cardápio de forma simples</h2>
   <form [formGroup]="form" class="mb-4">
     <app-input
       placeholder="Busque por um item no cardápio"
@@ -21,22 +13,36 @@
     <app-menu-category
       *ngFor="let category of categories"
       [category]="category"
-      [isSelected]="selectedCategory === category.label"
-      (click)="selectCategory(category.label)"
+      [isSelected]="selectedCategory === category.name"
+      (click)="selectCategory(category)"
     ></app-menu-category>
     <button
       class="flex items-center gap-2 p-3 font-medium text-white bg-blue-600 rounded-lg min-w-max whitespace-nowrap hover:bg-blue-700 focus:ring-4 focus:ring-blue-300"
-      (click)="navigateToCreateMenuCategory()"
     >
     <i class="w-3 h-3 me-1 fa fa-plus"></i>
     Nova categoria
     </button>
   </div>
+  <div class="mb-3">
+    <app-button
+        btnText="Novo Item"
+        icon="fa-solid fa-plus"
+        (onClick)="createMenuItem()"
+      ></app-button>
+  </div>
   <div
-    class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:md:grid-cols-6"
+    class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg: xl:grid-cols-4 min-[1480px]:grid-cols-5"
   >
-    <div *ngFor="let item of menuItems" class="">
-      <app-menu-item [item]="item"></app-menu-item>
+    <div *ngFor="let item of menuItems">
+      <app-menu-item [item]="item" (onClick)="editMenuItem(item)"></app-menu-item>
     </div>
   </div>
+</div>
+
+<div *ngIf="isSaveMenuItemModalOpen">
+  <app-save-menu-item [item]="selectedMenuItem" (closeModal)="closeSaveMenuItemModal()" (itemUpdated)="onItemUpdated()" (deleteItem)="deleteMenuItem()"></app-save-menu-item>
+</div>
+
+<div *ngIf="isDeleteMenuItemModalOpen">
+  <app-delete-menu-item [item]="selectedMenuItem" (closeModal)="closeDeleteModal()" (itemDeleted)="onItemDeleted()"></app-delete-menu-item>
 </div>

@@ -1,0 +1,92 @@
+<app-modal>
+  <!-- Modal content -->
+  <div class="relative w-full max-w-md max-h-full">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-lg shadow">
+      <!-- Modal header -->
+      <div
+        class="flex items-center justify-between p-4 border-b rounded-t md:p-5"
+      >
+        <h3 class="text-lg font-semibold text-gray-900">
+          {{item ? "Editar item do cardápio" : "Criar novo item do cardápio"}}
+        </h3>
+        <button
+          type="button"
+          class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto"
+          (click)="closeModal.emit()"
+        >
+          <svg
+            class="w-3 h-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 14"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+            />
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+      </div>
+      <!-- Modal body -->
+      <form class="p-4 md:p-5" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="col-span-2">
+            <app-input
+              label="Nome"
+              placeholder="Digite o nome do produto"
+              [required]="true"
+              name="name"
+              [control]="f.name"
+            ></app-input>
+          </div>
+          <div class="col-span-2 sm:col-span-1">
+            <app-input
+              label="Preço"
+              placeholder="R$199"
+              [required]="true"
+              name="price"
+              type="number"
+              [control]="f.price"
+            ></app-input>
+          </div>
+          <div class="col-span-2 sm:col-span-1">
+            <app-select
+              label="Categoria"
+              [name]="'category'"
+              [options]="categoryOptions"
+              [control]="f.category"
+              [required]="true"
+              placeholder="Selecione uma categoria"
+            ></app-select>
+          </div>
+          <div class="col-span-2">
+            <app-textarea
+              label="Descrição"
+              name="description"
+              placeholder="Escreva a descrição do produto aqui"
+              [control]="f.description"
+              [required]="true"
+            ></app-textarea>
+          </div>
+          <div class="col-span-2">
+           <app-file-input [control]="f.image"></app-file-input>
+          </div>
+        </div>
+        <div class="flex items-center">
+          <app-button
+            [btnText]="item ? 'Editar item' : 'Adicionar item'"
+            icon="fa-solid fa-plus"
+            type="submit"
+          ></app-button>
+          <app-button [iconOnly]="true" icon="fa-solid fa-trash" class="ml-auto" size="small" variant="outline" color="red" (onClick)="deleteItem.emit()"></app-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</app-modal>

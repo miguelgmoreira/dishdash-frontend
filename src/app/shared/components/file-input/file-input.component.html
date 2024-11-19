@@ -1,0 +1,21 @@
+<label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Foto do item</label>
+
+<div class="flex items-center border border-gray-300 rounded-lg">
+  <input
+    #fileInput
+    id="file_input"
+    type="file"
+    (change)="onFileChange($event)"
+    style="display: none;"
+    accept="image/*"
+  >
+
+  <button
+    type="button"
+    class="w-2/5 p-2.5 text-sm text-gray-900 border-r border-gray-200 rounded-l-lg cursor-pointer bg-gray-100 focus:outline-none hover:bg-gray-200"
+    (click)="fileInput.click()">
+    Selecionar Arquivo
+  </button>
+
+  <div class="w-3/5 p-2.5 text-sm text-gray-900 rounded-r-lg bg-gray-50 overflow-hidden text-ellipsis" [innerText]="selectedFileName || 'Nenhum arquivo selecionado'"></div>
+</div>

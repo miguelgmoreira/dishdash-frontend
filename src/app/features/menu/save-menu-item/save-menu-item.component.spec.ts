@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditMenuItemComponent } from './edit-menu-item.component';
+import { SaveMenuItemComponent } from './save-menu-item.component';
 
-describe('EditMenuItemComponent', () => {
-  let component: EditMenuItemComponent;
-  let fixture: ComponentFixture<EditMenuItemComponent>;
+describe('CreateMenuItemComponent', () => {
+  let component: SaveMenuItemComponent;
+  let fixture: ComponentFixture<SaveMenuItemComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditMenuItemComponent]
+      imports: [SaveMenuItemComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EditMenuItemComponent);
+    fixture = TestBed.createComponent(SaveMenuItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

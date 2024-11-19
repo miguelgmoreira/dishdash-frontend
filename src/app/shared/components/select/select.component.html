@@ -1,0 +1,21 @@
+<div>
+  <label
+    [for]="name"
+    class="block mb-2 text-sm font-medium text-gray-900"
+    *ngIf="label"
+    >{{ label }}</label
+  >
+
+  <select
+    [formControl]="control"
+    [name]="name"
+    [id]="name"
+    [required]="required"
+    class="block w-full p-2.5 text-gray-700 placeholder-gray-400 text-sm bg-gray-50 border border-gray-200 rounded-md outline-gray-200"
+  >
+    <option value="">{{ placeholder }}</option>
+    <option *ngFor="let option of options" [value]="option.value">
+      {{ option.label }}
+    </option>
+  </select>
+</div>

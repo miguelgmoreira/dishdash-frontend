@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
+/**
+ * Classe herdada pelos componentes que possuem formulários.s
+ */
 @Component({
   selector: 'app-form-base',
   standalone: true,

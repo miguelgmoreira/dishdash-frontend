@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import { FormBaseComponent } from '../../../shared/components/form-base/form-base.component';
+import { FormBaseComponent } from '../../../shared/components/base/form-base/form-base.component';
 import { InputComponent } from '../../../shared/components/input/input.component';
 
 @Component({

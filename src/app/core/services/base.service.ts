@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 /** 
- * Serviço base para services que possuem todas as operações CRUD simples.
+ * Serviço base para services que possuem todas as operações CRUD simples com o mesmo tipo para request e response.
  * 
  */
 export class BaseService<T> {

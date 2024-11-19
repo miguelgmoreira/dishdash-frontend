@@ -3,19 +3,17 @@ import { Component, Input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-input',
+  selector: 'app-textarea',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './input.component.html',
-  styleUrl: './input.component.css'
+  templateUrl: './textarea.component.html',
+  styleUrl: './textarea.component.css'
 })
-export class InputComponent {
-  @Input() type: string = 'text';
-  @Input() label?: string;
-  @Input() placeholder!: string;
+export class TextareaComponent {
+  @Input() label: string = '';
+  @Input() name: string = '';
+  @Input() placeholder: string = '';
   @Input() control!: FormControl;
-  @Input() name!: string;
-  @Input() icon?: string;
-  @Input() autocomplete: string = 'off';
   @Input() required: boolean = false;
+
 }

@@ -1,23 +1,37 @@
-<button
-  *ngIf="icon; else noIcon"
-  type="button"
-  class="font-medium rounded-lg focus:ring-4"
-  [ngClass]="[sizeClass, colorClass]"
-  [disabled]="disabled"
-  (click)="click.emit()"
->
-  <i class="w-3.5 h-3.5 me-2" [ngClass]="icon"></i>
-  {{ btnText }}
-</button>
-
-<ng-template #noIcon>
+<div *ngIf="iconOnly; else noIconOnly">
   <button
-    type="button"
+    [type]="type"
     class="font-medium rounded-lg focus:ring-4"
     [ngClass]="[sizeClass, colorClass]"
     [disabled]="disabled"
-    (click)="click.emit()"
+    (click)="onClick.emit()"
   >
+    <i class="w-3.5 h-3.5" [ngClass]="icon"></i>
+  </button>
+</div>
+
+<ng-template #noIconOnly>
+  <button
+    *ngIf="icon; else noIcon"
+    [type]="type"
+    class="font-medium rounded-lg focus:ring-4"
+    [ngClass]="[sizeClass, colorClass]"
+    [disabled]="disabled"
+    (click)="onClick.emit()"
+  >
+    <i class="w-3.5 h-3.5 me-2" [ngClass]="icon"></i>
     {{ btnText }}
   </button>
+
+  <ng-template #noIcon>
+    <button
+      type="button"
+      class="font-medium rounded-lg focus:ring-4"
+      [ngClass]="[sizeClass, colorClass]"
+      [disabled]="disabled"
+      (click)="onClick.emit()"
+    >
+      {{ btnText }}
+    </button>
+  </ng-template>
 </ng-template>

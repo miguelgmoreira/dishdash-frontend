@@ -1,0 +1,19 @@
+<app-modal>
+        <div class="relative w-full max-w-md max-h-full p-4">
+            <div class="relative bg-white rounded-lg shadow">
+                <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="p-4 text-center md:p-5">
+                    <svg class="w-12 h-12 mx-auto mb-4 text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                    </svg>
+                    <h3 class="mb-5 text-lg font-medium text-gray-600">Tem certeza que deseja excluir o produto <span class="font-medium text-red-600">{{item?.name}}</span> ?</h3>
+                    <div class="flex items-end justify-center gap-3">
+                        <app-button btnText="Sim, tenho certeza" color="red" (onClick)="onDeleteItem()"></app-button>
+                        <app-button btnText="Não, cancelar" variant="outline" (onClick)="closeModal.emit()"></app-button>
+                    </div>
+                </div>
+            </div>
+    </div>
+</app-modal>

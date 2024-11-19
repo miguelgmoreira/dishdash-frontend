@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateMenuItemComponent } from './create-menu-item.component';
+import { FileInputComponent } from './file-input.component';
 
-describe('CreateMenuItemComponent', () => {
-  let component: CreateMenuItemComponent;
-  let fixture: ComponentFixture<CreateMenuItemComponent>;
+describe('FileInputComponent', () => {
+  let component: FileInputComponent;
+  let fixture: ComponentFixture<FileInputComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreateMenuItemComponent]
+      imports: [FileInputComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CreateMenuItemComponent);
+    fixture = TestBed.createComponent(FileInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

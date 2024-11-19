@@ -1,5 +1,5 @@
 <div>
-    <label [for]="name" class="block mb-2 text-sm text-gray-600" *ngIf="label">{{ label }}</label>
+    <label [for]="name" class="block mb-2 text-sm font-medium text-gray-900" *ngIf="label">{{ label }}</label>
     
     <div class="relative" *ngIf="icon; else noIcon">
       <i class="absolute inset-y-0 start-0 text-lg flex items-center ps-3.5 pointer-events-none mt-1 text-gray-500" 
@@ -10,9 +10,10 @@
         [placeholder]="placeholder"
         [name]="name"
         [id]="name"
+        [min]="type === 'number' ? 0 : null"
         [autocomplete]="autocomplete"
         [required]="required"
-        class="block w-full p-2.5 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md ps-10 outline-gray-200"
+        class="block w-full p-2.5 text-gray-700 placeholder-gray-400 text-sm bg-gray-50 border border-gray-200 rounded-md ps-10 outline-gray-200"
       />
     </div>
   
@@ -24,11 +25,10 @@
         [name]="name"
         [id]="name"
         [autocomplete]="autocomplete"
+        [min]="type === 'number' ? 0 : null"
         [required]="required"
-        class="block w-full p-2.5 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md outline-gray-200"
+        class="block w-full p-2.5 text-gray-700 placeholder-gray-400 text-sm bg-gray-50 border border-gray-200 rounded-md outline-gray-200"
       />
     </ng-template>
-  
-    <app-form-errors [control]="control"></app-form-errors>
   </div>
   

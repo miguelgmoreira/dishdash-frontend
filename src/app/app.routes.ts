@@ -24,32 +24,6 @@ export const routes: Routes = [
                 (m) => m.ManageMenuComponent
               ),
           },
-          {
-            path: 'novo',
-            loadComponent: () =>
-              import('./features/menu/create-menu-item/create-menu-item.component').then(
-                (m) => m.CreateMenuItemComponent
-              ),
-          },
-          {
-            path: 'editar/:id',
-            loadComponent: () =>
-              import('./features/menu/edit-menu-item/edit-menu-item.component').then(
-                (m) => m.EditMenuItemComponent
-              ),
-          },
-          {
-            path: 'categoria',
-            children: [
-              {
-                path: 'novo',
-                loadComponent: () => 
-                  import('./features/menu/create-menu-category/create-menu-category.component').then(
-                    (m) => m.CreateMenuCategoryComponent
-                  )
-              }
-            ]
-          },
         ]
       }
     ],
