@@ -26,18 +26,6 @@ export class SidebarComponent {
       label: 'Gerenciar cardápio',
       icon: 'store',
       route: '/gerenciar-cardapio',
-    },
-    { label: 'Configurações', icon: 'gear', route: '/configuracoes' },
-    { label: 'Ajuda', icon: 'circle-question', route: '/configuracoes' },
-    {
-      label: 'Minha conta',
-      icon: 'user',
-      route: '/configuracoes',
-      toggleElementId: 'dropdown-example',
-      subItems: [
-        { label: 'Editar Perfil', route: '/' },
-        { label: 'Finalizar sessão', isButton: true },
-      ],
-    },
+    }
   ];
 }

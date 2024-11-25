@@ -84,7 +84,7 @@
             icon="fa-solid fa-plus"
             type="submit"
           ></app-button>
-          <app-button [iconOnly]="true" icon="fa-solid fa-trash" class="ml-auto" size="small" variant="outline" color="red" (onClick)="deleteItem.emit()"></app-button>
+          <app-button *ngIf="item" [iconOnly]="true" icon="fa-solid fa-trash" class="ml-auto" size="small" variant="outline" color="red" (onClick)="deleteItem.emit()"></app-button>
         </div>
       </form>
     </div>

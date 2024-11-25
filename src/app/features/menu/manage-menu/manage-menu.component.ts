@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { MenuCategoryService } from '../../../core/services/menu-category.service';
 import { MenuItemService } from '../../../core/services/menu-item.service';
@@ -13,7 +12,9 @@ import { MenuCategoryComponent } from '../../../shared/components/menu-category/
 import { MenuItemComponent } from '../../../shared/components/menu-item/menu-item.component';
 import { MenuCategoryResponse } from '../../../shared/models/menu-category.model';
 import { MenuItemResponse } from '../../../shared/models/menu-item.model';
+import { DeleteMenuCategoryComponent } from '../delete-menu-category/delete-menu-category.component';
 import { DeleteMenuItemComponent } from '../delete-menu-item/delete-menu-item.component';
+import { SaveMenuCategoryComponent } from '../save-menu-category/save-menu-category.component';
 import { SaveMenuItemComponent } from '../save-menu-item/save-menu-item.component';
 
 @Component({
@@ -27,28 +28,33 @@ import { SaveMenuItemComponent } from '../save-menu-item/save-menu-item.componen
     MenuItemComponent,
     ButtonComponent,
     SaveMenuItemComponent,
-    DeleteMenuItemComponent
+    DeleteMenuItemComponent,
+    SaveMenuCategoryComponent,
+    DeleteMenuCategoryComponent,
   ],
   templateUrl: './manage-menu.component.html',
-  styleUrl: './manage-menu.component.css',
+  styleUrls: ['./manage-menu.component.css'],
 })
 export class ManageMenuComponent extends FormBaseComponent implements OnInit {
   private unsubscribe$ = new Subject<void>();
   selectedCategory: string = 'Todos';
   isSaveMenuItemModalOpen: boolean = false;
   isDeleteMenuItemModalOpen: boolean = false;
+  isDeleteCategoryModalOpen: boolean = false;
+  isSaveCategoryModalOpen: boolean = false;
+
   selectedMenuItem: MenuItemResponse | null = null;
+  selectedCategoryObject: MenuCategoryResponse | null = null;
 
   categories: MenuCategoryResponse[] = [];
-
   menuItems: MenuItemResponse[] = [];
+  itemsLoaded: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private searchService: SearchService,
     private menuCategoryService: MenuCategoryService,
     private menuItemService: MenuItemService,
-    private router: Router
   ) {
     super();
   }
@@ -61,7 +67,7 @@ export class ManageMenuComponent extends FormBaseComponent implements OnInit {
     this.searchService.searchTerm$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((searchTerm) => {
-        this.onSearch(searchTerm);
+        this.getAllMenuItems(searchTerm);
       });
 
     this.form
@@ -77,9 +83,13 @@ export class ManageMenuComponent extends FormBaseComponent implements OnInit {
     this.unsubscribe$.complete();
   }
 
-  onSearch(searchTerm: string): void {
-    console.log('Buscando por: ', searchTerm);
-    // TODO: Implementar busca por filtro. Default, getAll().
+  getAllMenuItems(searchTerm?: string, category?: string): void {
+    const categoryId = category === 'Todos' ? 0 : this.categories.find(c => c.name === category)?.id || 0;
+    this.itemsLoaded = false;
+    this.menuItemService.getAll(searchTerm, categoryId).subscribe((items) => {
+      this.menuItems = items;
+      this.itemsLoaded = true;
+    });
   }
 
   override buildForm(): void {
@@ -107,40 +117,43 @@ export class ManageMenuComponent extends FormBaseComponent implements OnInit {
     });
   }
 
-  getAllMenuItems(): void {
-    this.menuItemService.getAll().subscribe((items) => {
-      this.menuItems = items;
-    });
-  }
-
-  getItemsByCategory(categoryId: number): void {
-    if (categoryId === 0) {
-      this.getAllMenuItems();
-    } else {
-      this.menuItemService.getByCategory(categoryId).subscribe((items) => {
-        this.menuItems = items;
-      });
-    }
-  }
-
   selectCategory(category: MenuCategoryResponse) {
     this.selectedCategory = category.name;
+    this.getAllMenuItems(this.form.get('searchItem')?.value || '', this.selectedCategory);
   }
 
-  editMenuItem(item: MenuItemResponse): void {
+  openEditMenuItemModal(item: MenuItemResponse): void {
     this.selectedMenuItem = item;
     this.isSaveMenuItemModalOpen = true;
   }
 
-  createMenuItem(): void {
+  openCreateMenuItemModal(): void {
     this.selectedMenuItem = null;
     this.isSaveMenuItemModalOpen = true;
   }
 
-  deleteMenuItem(): void {
+  openDeleteMenuItemModal(): void {
     this.isSaveMenuItemModalOpen = false;
     this.isDeleteMenuItemModalOpen = true;
-    console.log(this.selectedMenuItem)
+  }
+
+  openDeleteCategoryModal(): void {
+    this.isSaveCategoryModalOpen = false;
+    this.isDeleteCategoryModalOpen = true;
+  }
+
+  openSaveCategoryModal(category?: MenuCategoryResponse): void {
+    if (category) {
+      this.selectedCategoryObject = category;
+    } else {
+      this.selectedCategoryObject = null;
+    }
+    this.isSaveCategoryModalOpen = true;
+  }
+
+  closeSaveCategoryModal(): void {
+    this.isSaveCategoryModalOpen = false;
+    this.selectedCategoryObject = null;
   }
 
   closeSaveMenuItemModal(): void {
@@ -148,21 +161,40 @@ export class ManageMenuComponent extends FormBaseComponent implements OnInit {
     this.selectedMenuItem = null;
   }
 
-  closeDeleteModal(): void {
+  closeDeleteItemModal(): void {
     this.isDeleteMenuItemModalOpen = false;
     this.isSaveMenuItemModalOpen = true;
   }
 
+  closeDeleteCategoryModal(): void {
+    this.isDeleteCategoryModalOpen = false;
+    this.isSaveCategoryModalOpen = true;
+  }
+
   onItemUpdated(): void {
-    this.getAllMenuItems();
+    this.getAllMenuItems(this.form.get('searchItem')?.value || '', this.selectedCategory);
+    this.getAllCategories();
     this.closeSaveMenuItemModal();
   }
 
+  onCategoryUpdated(): void {
+    this.getAllMenuItems(this.form.get('searchItem')?.value || '', this.selectedCategory);
+    this.getAllCategories();
+    this.closeSaveCategoryModal();
+  }
+
   onItemDeleted(): void {
-    this.getAllMenuItems();
+    this.getAllMenuItems(this.form.get('searchItem')?.value || '', this.selectedCategory);
+    this.getAllCategories();
     this.isDeleteMenuItemModalOpen = false;
     this.selectedMenuItem = null;
   }
 
-  toggleCreateMenuCategory(): void {}
+  onCategoryDeleted(): void {
+    this.getAllMenuItems(this.form.get('searchItem')?.value || '', this.selectedCategory);
+    this.getAllCategories();
+    this.isDeleteCategoryModalOpen = false;
+    this.selectedCategoryObject = null;
+    this.selectedCategory = 'Todos';
+  }
 }

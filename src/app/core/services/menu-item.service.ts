@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MenuItemRequest, MenuItemResponse } from '../../shared/models/menu-item.model';
@@ -11,8 +11,15 @@ export class MenuItemService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<MenuItemResponse[]> {
-    return this.http.get<MenuItemResponse[]>(this.baseUrl);
+  getAll(searchTerm?: string, categoryId?: number): Observable<MenuItemResponse[]> {
+    let params = new HttpParams();
+    if (searchTerm) {
+      params = params.set('search', searchTerm);
+    }
+    if (categoryId) {
+      params = params.set('categoryId', categoryId.toString());
+    }
+    return this.http.get<MenuItemResponse[]>('/api/menu-items', { params });
   }
   
   getByCategory(categoryId: number): Observable<MenuItemResponse[]> {

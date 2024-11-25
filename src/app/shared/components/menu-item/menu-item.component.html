@@ -1,14 +1,31 @@
-<div class="relative flex flex-col w-full h-auto p-4 border border-gray-200 rounded-md bg-primary-light">
-  <img [src]="item.imageUrl" alt="" class="object-cover w-full mx-auto mb-6 h-44 rounded-xl" />
-  <div class="mb-2 text-base font-medium">{{item.name}}</div>
+<div
+  class="relative flex flex-col w-full h-auto p-4 border border-gray-200 rounded-md bg-primary-light"
+>
+  <img
+    [src]="item.imageUrl"
+    alt=""
+    class="object-cover w-full mx-auto mb-6 h-44 rounded-xl"
+  />
+  <div class="mb-2 text-base font-medium">{{ item.name }}</div>
   <div class="text-base">
     <span *ngIf="item.discountedPrice; else normalPrice">
-      <span class="mr-2 text-sm text-gray-400 line-through">{{ item.price | currency:'BRL' }}</span>
-      <span class="font-semibold text-green-600">{{ item.discountedPrice | currency:'BRL' }}</span>
+      <span class="mr-2 text-sm text-gray-400 line-through">{{
+        item.price | currency : "BRL"
+      }}</span>
+      <span class="font-semibold text-green-600">{{
+        item.discountedPrice | currency : "BRL"
+      }}</span>
     </span>
     <ng-template #normalPrice>
-      <span>{{ item.price | currency:'BRL' }}</span>
+      <span>{{ item.price | currency : "BRL" }}</span>
     </ng-template>
   </div>
-    <app-button btnText="Editar" icon="fa-solid fa-pen" size="small" class="mt-4 ml-auto" variant="outline" (onClick)="onClick.emit()"></app-button>
+  <app-button
+    btnText="Editar"
+    icon="fa-solid fa-pen"
+    size="small"
+    class="mt-4 ml-auto"
+    variant="outline"
+    (onClick)="onClick.emit()"
+  ></app-button>
 </div>

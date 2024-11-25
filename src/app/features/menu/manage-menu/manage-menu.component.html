@@ -1,5 +1,5 @@
 <div class="p-4 border-gray-200 rounded-lg">
-  <h2 class="mb-6 text-2xl">Seu cardápio de forma simples</h2>
+  <h2 class="mb-6 text-2xl">Gerencie seu cardápio de forma simples</h2>
   <form [formGroup]="form" class="mb-4">
     <app-input
       placeholder="Busque por um item no cardápio"
@@ -14,35 +14,67 @@
       *ngFor="let category of categories"
       [category]="category"
       [isSelected]="selectedCategory === category.name"
-      (click)="selectCategory(category)"
+      (selectCategory)="selectCategory(category)"
+      (editCategory)="openSaveCategoryModal(category)"
     ></app-menu-category>
     <button
       class="flex items-center gap-2 p-3 font-medium text-white bg-blue-600 rounded-lg min-w-max whitespace-nowrap hover:bg-blue-700 focus:ring-4 focus:ring-blue-300"
+      (click)="openSaveCategoryModal()"
     >
-    <i class="w-3 h-3 me-1 fa fa-plus"></i>
-    Nova categoria
+      <i class="w-3 h-3 me-1 fa fa-plus"></i>
+      Nova categoria
     </button>
   </div>
   <div class="mb-3">
     <app-button
-        btnText="Novo Item"
-        icon="fa-solid fa-plus"
-        (onClick)="createMenuItem()"
-      ></app-button>
+    btnText="Novo Item"
+    icon="fa-solid fa-plus"
+    (onClick)="openCreateMenuItemModal()"
+    ></app-button>
   </div>
+  <h2 *ngIf="menuItems.length <= 0 && itemsLoaded">Nenhum item encontrado!</h2>
   <div
     class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg: xl:grid-cols-4 min-[1480px]:grid-cols-5"
   >
     <div *ngFor="let item of menuItems">
-      <app-menu-item [item]="item" (onClick)="editMenuItem(item)"></app-menu-item>
+      <app-menu-item
+        [item]="item"
+        (onClick)="openEditMenuItemModal(item)"
+      ></app-menu-item>
     </div>
   </div>
 </div>
 
 <div *ngIf="isSaveMenuItemModalOpen">
-  <app-save-menu-item [item]="selectedMenuItem" (closeModal)="closeSaveMenuItemModal()" (itemUpdated)="onItemUpdated()" (deleteItem)="deleteMenuItem()"></app-save-menu-item>
+  <app-save-menu-item
+    [item]="selectedMenuItem"
+    (closeModal)="closeSaveMenuItemModal()"
+    (itemUpdated)="onItemUpdated()"
+    (deleteItem)="openDeleteMenuItemModal()"
+  ></app-save-menu-item>
 </div>
 
 <div *ngIf="isDeleteMenuItemModalOpen">
-  <app-delete-menu-item [item]="selectedMenuItem" (closeModal)="closeDeleteModal()" (itemDeleted)="onItemDeleted()"></app-delete-menu-item>
+  <app-delete-menu-item
+    [item]="selectedMenuItem"
+    (closeModal)="closeDeleteItemModal()"
+    (itemDeleted)="onItemDeleted()"
+  ></app-delete-menu-item>
+</div>
+
+<div *ngIf="isSaveCategoryModalOpen">
+  <app-save-menu-category
+    (closeModal)="closeSaveCategoryModal()"
+    [category]="selectedCategoryObject"
+    (categoryUpdated)="onCategoryUpdated()"
+    (deleteCategory)="openDeleteCategoryModal()"
+  ></app-save-menu-category>
+</div>
+
+<div *ngIf="isDeleteCategoryModalOpen">
+  <app-delete-menu-category
+    [category]="selectedCategoryObject"
+    (closeModal)="closeDeleteCategoryModal()"
+    (categoryDeleted)="onCategoryDeleted()"
+  ></app-delete-menu-category>
 </div>

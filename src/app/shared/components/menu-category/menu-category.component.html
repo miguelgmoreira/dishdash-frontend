@@ -1,14 +1,25 @@
-<button
-  class="flex items-center gap-2 p-3 rounded-lg min-w-max hover:bg-gray-200 whitespace-nowrap"
-  [ngClass]="{ 'bg-gray-200': isSelected, 'bg-gray-100': !isSelected }"
->
-  <img
-    [src]="category.imageUrl"
-    alt=""
-    class="object-cover w-12 h-12 rounded-md"
-  />
-  <div class="flex flex-col text-start">
-    <div class="text-base font-semibold">{{ category.name }}</div>
-    <div class="text-sm">{{ category.itemCount }} items</div>
-  </div>
-</button>
+<div class="flex">
+  <button
+    class="relative flex items-center gap-2 p-3 rounded-lg min-w-max hover:bg-gray-200 whitespace-nowrap"
+    [ngClass]="{ 'bg-gray-200': isSelected, 'bg-gray-100': !isSelected }"
+    (click)="selectCategory.emit()"
+  >
+    <img
+      [src]="category.imageUrl"
+      alt=""
+      class="object-cover w-12 h-12 rounded-md"
+    />
+    <div class="flex flex-col text-start">
+      <div class="text-base font-semibold">{{ category.name }}</div>
+      <div class="text-sm">{{ category.itemCount }} items</div>
+    </div>
+  </button>
+  <app-button
+    *ngIf="category.id !== 0"
+    [iconOnly]="true"
+    icon="fa-solid fa-pen"
+    size="small"
+    variant="outline"
+    (onClick)="editCategory.emit()"
+  ></app-button>
+</div>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MenuItemService } from '../../../core/services/menu-item.service';
+import { ToastService } from '../../../core/services/toast.service';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { ModalComponent } from '../../../shared/components/modal/modal.component';
 import { MenuItemResponse } from '../../../shared/models/menu-item.model';
@@ -17,11 +18,12 @@ export class DeleteMenuItemComponent {
   @Output() closeModal = new EventEmitter<any>();
   @Output() itemDeleted = new EventEmitter<any>();
 
-  constructor(private menuItemService: MenuItemService) {}
+  constructor(private menuItemService: MenuItemService, private toastService: ToastService) {}
 
   onDeleteItem(): void {
     if(this.item) {
       this.menuItemService.deleteMenuItem(this.item.id).subscribe(() => {
+        this.toastService.showSuccess("Item excluído com sucesso");
         this.itemDeleted.emit();
       });
     }

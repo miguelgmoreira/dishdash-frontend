@@ -1,8 +1,6 @@
 export interface MenuCategoryRequest {
-    id: number
     name: string,
     image: File,
-    itemCount: number,
 }
 
 export interface MenuCategoryResponse {

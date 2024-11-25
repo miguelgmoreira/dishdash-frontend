@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { ToggleDisplayDirective } from '../../shared/directives/toggle-display.directive';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [ToggleDisplayDirective],
+  imports: [],
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
